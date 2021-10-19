@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import study.eng.entity.User;
+import study.eng.repository.RuWordRepository;
 import study.eng.service.UserService;
 
 @Controller

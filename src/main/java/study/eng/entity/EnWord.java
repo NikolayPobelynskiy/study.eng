@@ -21,16 +21,39 @@ public class EnWord {
     @Column(name = "category_id")
     private String categoryId;
 
-//    @OneToMany(mappedBy = "ruWord", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<RuWord> ruWords = new HashSet<>();
-//    public void addBook(RuWord word){
-//        ruWords.add(word);
-////        book.setAuthor(this);
+//    //@OneToOne(fetch = FetchType.LAZY)
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "address_id", referencedColumnName = "category_id")
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "category_id", nullable = false, insertable=false, updatable=false)
+    private EnWordCategory category;
+
+    public EnWordCategory getCategory() {
+        return category;
+    }
+
+//    public void setCategory(EnWordCategory category) {
+//        this.category = category;
 //    }
-//    public void removeBook(RuWord word){
-//        ruWords.remove(word);
-////        book.setAuthor(null);
-//    }
+
+    @OneToMany(mappedBy = "enWordId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<RuWord> ruWords = new HashSet<>();
+
+    public Set<RuWord> getRuWords() {
+        return ruWords;
+    }
+
+    @OneToMany(mappedBy = "enWordId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Phrases> phrases = new HashSet<>();
+
+    public Set<Phrases> getPhrases() {
+        return phrases;
+    }
+
+    public void setRuWords(Set<RuWord> ruWords) {
+        this.ruWords = ruWords;
+    }
 
     public Long getEnWordId() {
         return enWordId;

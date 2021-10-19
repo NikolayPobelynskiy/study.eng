@@ -1,4 +1,8 @@
 package study.eng.repository;
 
-public interface EnWordCategoryRepository {
-}
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import study.eng.entity.EnWordCategory;
+
+@Repository
+public interface EnWordCategoryRepository extends JpaRepository<EnWordCategory, Long> { }

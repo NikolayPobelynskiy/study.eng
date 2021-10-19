@@ -19,7 +19,7 @@ public class Phrases {
     private String translation;
 
     @Column(name = "en_word_id")
-    private String enWordId;
+    private Long enWordId;
 
     public Long getPhraseId() {
         return phraseId;
@@ -45,11 +45,11 @@ public class Phrases {
         this.translation = translation;
     }
 
-    public String getEnWordId() {
+    public Long getEnWordId() {
         return enWordId;
     }
 
-    public void setEnWordId(String enWordId) {
+    public void setEnWordId(Long enWordId) {
         this.enWordId = enWordId;
     }
 }

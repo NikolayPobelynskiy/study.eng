@@ -27,8 +27,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/draft").permitAll()
+                .antMatchers("/admin/categories/**").permitAll()
+                .antMatchers("/admin/en-words/**").permitAll()
+                .antMatchers("/admin/ru-words/**").permitAll()
+                .antMatchers("/admin/phrases/**").permitAll()
                 .antMatchers("/registration").permitAll()
-                .antMatchers("/", "/home").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/home").permitAll()
                 .anyRequest().authenticated();
 
         http
@@ -38,6 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
+
+//                http.authorizeRequests()
+//                .antMatchers("/admin/**").hasRole( "ADMIN");
 
 //        http.authorizeRequests()
 ////                .antMatchers("/admin/**").hasRole( "ADMIN")

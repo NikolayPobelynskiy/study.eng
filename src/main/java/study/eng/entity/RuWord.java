@@ -7,9 +7,8 @@ public class RuWord {
     public void RuWord() {}
 
     @Id
-    @Column(name = "ru_word_id")
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long ruWordId;
+    private Long id;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    private EnWord enWord;
@@ -18,16 +17,15 @@ public class RuWord {
     private String word;
 
     @Column(name = "en_word_id")
-    private String enWordId;
+    private Long enWordId;
 
-    public Long getRuWordId() {
-        return ruWordId;
+    public Long getId() {
+        return id;
     }
 
-    public void setRuWordId(Long ruWordId) {
-        this.ruWordId = ruWordId;
+    public void setId(Long ruWordId) {
+        this.id = ruWordId;
     }
-
 //    public EnWord getEnWord() {
 //        return enWord;
 //    }
@@ -35,6 +33,7 @@ public class RuWord {
 //    public void setEnWord(EnWord enWord) {
 //        this.enWord = enWord;
 //    }
+//
 
     public String getWord() {
         return word;
@@ -44,11 +43,11 @@ public class RuWord {
         this.word = word;
     }
 
-    public String getEnWordId() {
+    public Long getEnWordId() {
         return enWordId;
     }
 
-    public void setEnWordId(String enWordId) {
+    public void setEnWordId(Long enWordId) {
         this.enWordId = enWordId;
     }
 }
