@@ -1,4 +1,4 @@
-package study.eng;
+package study.eng.security;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +24,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers("/draft").permitAll()
-                .antMatchers("/admin/categories/**").permitAll()
-                .antMatchers("/admin/en-words/**").permitAll()
-                .antMatchers("/admin/ru-words/**").permitAll()
-                .antMatchers("/admin/phrases/**").permitAll()
-                .antMatchers("/registration").permitAll()
-                .antMatchers("/").permitAll()
-                .antMatchers("/home").permitAll()
-                .anyRequest().authenticated();
 
+        http.authorizeRequests()
+                .antMatchers("/registration").not().fullyAuthenticated()
+                .antMatchers(
+                        "/admin/en-words/*",
+                        "/admin/categories/*",
+                        "/admin/ru-words/*",
+                        "/admin/phrases/*",
+                        "/admin/")
+                .hasRole("ADMIN")
+                .antMatchers("/personal").hasRole("USER")
+                .antMatchers("/", "/home").permitAll()
+                .anyRequest().authenticated();
         http
                 .formLogin()
                 .loginPage("/login")
@@ -43,28 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll();
-
-//                http.authorizeRequests()
-//                .antMatchers("/admin/**").hasRole( "ADMIN");
-
-//        http.authorizeRequests()
-////                .antMatchers("/admin/**").hasRole( "ADMIN")
-////                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
-//                .antMatchers("/draft").permitAll();
     }
-
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user =
-//                User.withDefaultPasswordEncoder()
-//                        .username("user")
-//                        .password("password")
-//                        .roles("USER")
-//                        .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {

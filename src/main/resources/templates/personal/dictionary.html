@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">слово</th>
+                    <th scope="col">Варианты перевода</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item, iterStat : ${enWords}">
+                    <th scope="row" th:text="${iterStat.count}"></th>
+                    <th>
+                        <b th:text="${item.word}"></b>
+                        <ul th:each="phrase : ${item.phrases}">
+                            <li>
+                                <span th:text="${phrase.text}" style="font-size:14px; color:#796060"></span>
+                                <span th:text="${phrase.translation}" style="font-size:12px; color:#9a9c97"></span>
+                            </li>
+                        </ul>
+                    </th>
+                    <th>
+                        <ul>
+                            <li th:each="ruWord : ${item.ruWords}" th:text="${ruWord.word}"></li>
+                        </ul>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

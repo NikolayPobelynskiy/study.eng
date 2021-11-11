@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Моя страница</title>
+</head>
+<body>
+<h1 th:inline="text">Вы вошли как [[${#httpServletRequest.remoteUser}]] (Admin)</h1>
+<ul>
+    <li><a th:href="@{/admin/en-words/view}">Список слов</a></li>
+    <li><a th:href="@{/admin/en-words/add}">Добавить слово</a></li>
+    <li><a th:href="@{/admin/categories/add}">Добавить категорию</a></li>
+    <li><a th:href="@{/admin/categories/view}">Список категорий</a></li>
+</ul>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выход"/>
+</form>
+</body>
+</html>

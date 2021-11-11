@@ -49,6 +49,25 @@ public class User implements UserDetails {
         this.role = role;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
+    private Dictionary dictionary;
+
+    public Dictionary getDictionary() {
+        return dictionary;
+    }
+
+    public void setDictionary(Dictionary dictionary) {
+        this.dictionary = dictionary;
+    }
+
     @Override
     public String getPassword() {
         return password;
@@ -74,6 +93,10 @@ public class User implements UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public boolean isUserRole() {return this.role == UserRole.ROLE_USER; }
+
+    public boolean isAdminRole() {return this.role == UserRole.ROLE_ADMIN; }
 
     @Override
     public boolean isAccountNonExpired() {

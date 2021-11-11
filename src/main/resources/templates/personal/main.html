@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Моя страница</title>
+</head>
+<body>
+<h1 th:inline="text">Вы вошли как [[${#httpServletRequest.remoteUser}]]!</h1>
+<ul>
+    <li><a th:href="@{/personal/dictionary}">Список слов</a></li>
+    <li><a th:href="@{/personal/dictionary-add}">Мой словарь</a></li>
+<!--    <li><a href="">Пройти тест</a></li>-->
+<!--    <li><a href="">Статистика</a></li>-->
+</ul>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выход"/>
+</form>
+</body>
+</html>

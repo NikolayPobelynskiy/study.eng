@@ -1,5 +1,6 @@
 package study.eng.service;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import study.eng.entity.EnWord;
 import study.eng.repository.EnWordRepository;

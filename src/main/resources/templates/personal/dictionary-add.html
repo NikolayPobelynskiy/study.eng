@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Список слов</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">слово</th>
+                <th scope="col">Варианты перевода</th>
+                <th scope="col">Категория</th>
+                <th scope="col">Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${words}">
+                <th scope="row">1</th>
+                <th>
+                    <b th:text="${item.word.word}"></b>
+                    <ul th:each="phrase : ${item.word.phrases}">
+                        <li>
+                            <span th:text="${phrase.text}" style="font-size:14px; color:#796060"></span>
+                            <span th:text="${phrase.translation}" style="font-size:12px; color:#9a9c97"></span>
+                        </li>
+                    </ul>
+                </th>
+                <th>
+                    <ul>
+                        <li th:each="ruWord : ${item.word.ruWords}" th:text="${ruWord.word}"></li>
+                    </ul>
+                </th>
+                <th th:text="${item.word.category.categoryName}"></th>
+                <th>
+                    <block th:if="${item.wordIsAdded}">
+                        <a th:href="@{/personal/remove(en_word_id=${item.word.enWordId})}">Убрать из словаря</a>
+                    </block>
+                    <block th:unless="${item.wordIsAdded}">
+                        <a th:href="@{/personal/add(en_word_id=${item.word.enWordId})}">Добавить в словарь</a>
+                    </block>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

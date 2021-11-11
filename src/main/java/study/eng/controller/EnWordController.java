@@ -1,18 +1,22 @@
 package study.eng.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import study.eng.entity.EnWord;
 import study.eng.entity.RuWord;
+import study.eng.entity.User;
 import study.eng.service.EnWordCategoryService;
 import study.eng.service.EnWordService;
 import study.eng.service.RuWordService;
 
 @Controller()
 @RequestMapping("/admin/en-words")
-public class EnWordConroller {
+public class EnWordController {
     @Autowired
     private EnWordCategoryService categoryService;
 
@@ -23,7 +27,7 @@ public class EnWordConroller {
     private RuWordService ruWordService;
 
     @Autowired
-    public void setEnWordCategoryService(EnWordCategoryService categoryService, EnWordService enWordService, RuWordService ruWordService) {
+    public void setServices(EnWordCategoryService categoryService, EnWordService enWordService, RuWordService ruWordService) {
         this.categoryService = categoryService;
         this.enWordService = enWordService;
         this.ruWordService = ruWordService;
@@ -31,6 +35,7 @@ public class EnWordConroller {
 
     @GetMapping("/view")
     public String view(Model model) {
+
         model.addAttribute("words", this.enWordService.findAll());
         return "/admin/en-words/view";
     }
@@ -38,7 +43,6 @@ public class EnWordConroller {
     @GetMapping("/add")
     public String add(Model model) {
         model.addAttribute("enWord", new EnWord());
-        // model.addAttribute("ruWord");
         model.addAttribute("categories", this.categoryService.findAll());
         return "/admin/en-words/add";
     }

@@ -1,6 +1,7 @@
 package study.eng.entity;
 
 public enum UserRole {
-    ADMIN,
-    USER
+    //ADMIN,
+    ROLE_ADMIN,
+    ROLE_USER
 }

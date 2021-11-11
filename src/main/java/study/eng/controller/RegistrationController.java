@@ -7,12 +7,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import study.eng.entity.Dictionary;
 import study.eng.entity.User;
 import study.eng.repository.RuWordRepository;
 import study.eng.service.UserService;
 
 @Controller
-public class Registration {
+public class RegistrationController {
     @Autowired
     private UserService userService;
 
@@ -34,6 +35,11 @@ public class Registration {
 //            model.addAttribute("passwordError", "Пароли не совпадают");
 //            return "registration";
 //        }
+
+        Dictionary dictionary = new Dictionary();
+        dictionary.setUser(user);
+        user.setDictionary(dictionary);
+
         if (!userService.saveUser(user)){
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";

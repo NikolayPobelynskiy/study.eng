@@ -1,5 +1,8 @@
 package study.eng.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,9 +24,8 @@ public class EnWord {
     @Column(name = "category_id")
     private String categoryId;
 
-//    //@OneToOne(fetch = FetchType.LAZY)
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "address_id", referencedColumnName = "category_id")
+    @ManyToMany
+    Set<Dictionary> dictionary;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id", nullable = false, insertable=false, updatable=false)
@@ -33,25 +35,30 @@ public class EnWord {
         return category;
     }
 
-//    public void setCategory(EnWordCategory category) {
-//        this.category = category;
-//    }
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "enWordId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<RuWord> ruWords = new ArrayList<RuWord>();
 
-    @OneToMany(mappedBy = "enWordId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<RuWord> ruWords = new HashSet<>();
-
-    public Set<RuWord> getRuWords() {
+    public List<RuWord> getRuWords() {
         return ruWords;
     }
 
-    @OneToMany(mappedBy = "enWordId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Phrases> phrases = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "enWordId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Phrases> phrases = new ArrayList<Phrases>();
 
-    public Set<Phrases> getPhrases() {
+    public Set<Dictionary> getDictionary() {
+        return dictionary;
+    }
+
+    public void setDictionary(Set<Dictionary> dictionary) {
+        this.dictionary = dictionary;
+    }
+
+    public List<Phrases> getPhrases() {
         return phrases;
     }
 
-    public void setRuWords(Set<RuWord> ruWords) {
+    public void setRuWords(List<RuWord> ruWords) {
         this.ruWords = ruWords;
     }
 

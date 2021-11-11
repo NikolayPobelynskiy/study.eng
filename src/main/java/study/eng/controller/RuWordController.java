@@ -38,7 +38,7 @@ public class RuWordController {
         ruWord.setEnWordId(enWordId);
 
         model.addAttribute("ruWord", ruWord);
-        model.addAttribute("enWord", this.enWordService.findById(enWordId));
+        model.addAttribute("enWord", this.enWordService.findById(enWordId).get());
         return "/admin/ru-words/add";
     }
 

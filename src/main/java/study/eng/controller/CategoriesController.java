@@ -12,7 +12,7 @@ import study.eng.service.EnWordCategoryService;
 
 @Controller()
 @RequestMapping("/admin/categories")
-public class Categories {
+public class CategoriesController {
     @Autowired
     private EnWordCategoryService categoryService;
 

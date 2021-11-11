@@ -13,9 +13,6 @@ public class EnWordCategory {
     @Column(name= "category_name")
     private String categoryName;
 
-//    @OneToMany(mappedBy = "categoryId", cascade = CascadeType.ALL)
-//    private EnWord enWord;
-
     public Long getCategoryId() {
         return categoryId;
     }
